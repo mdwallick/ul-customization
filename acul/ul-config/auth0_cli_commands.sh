@@ -13,9 +13,15 @@ auth0 ul customize -r standard
 # Use ACUL as the rendering mode
 auth0 ul customize -r advanced -p {PROMPT} -s {SCREEN} -f {CONFIG_FILE}
 
+# local dev
+auth0 ul customize -r advanced -p "login-id" -s "login-id" -f ./screen_configs/dev-settings.json
+
+# prod
+auth0 ul customize -r advanced -p "login-id" -s "login-id" -f ./screen_configs/prod-settings.json
+
+# auth0 ul customize -r advanced -p "login-password" -s "login-password" -f ./screen_configs/dev-settings.json
+# auth0 ul customize -r advanced -p "login-passwordless" -s "login-passwordless-email-code" -f ./screen_configs/dev-settings.json
+
 # Use the default Universal Login UI
 auth0 ul customize -r standard -p {PROMPT} -s {SCREEN} -f ./screen_configs/reset-to-standard.json
-
-
-
-
+auth0 ul customize -r advanced -p "login-passwordless" -s "login-passwordless-email-code" -f ./screen_configs/reset-to-standard.json
