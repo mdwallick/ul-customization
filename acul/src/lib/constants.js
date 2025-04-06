@@ -1,6 +1,6 @@
 // Base URL for Assets (Local or Remote)
 export const BASE_URL =
-  "https://storage.googleapis.com/thorax-studios-acul/acul-demo"
+  "https://storage.googleapis.com/thorax-studios-acul/organization-demo"
 
 // App Homepage URL
 //export const APP_URL = "http://localhost:3000"
