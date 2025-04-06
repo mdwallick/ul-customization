@@ -7,10 +7,10 @@ export default function Widget() {
     const screen = getCurrentScreen() || "";
 
     return (
-        <div className="flex-1 w-full mx-auto max-w-7x">
-            <Card className="w-[512px] p-4 shadow-lg my-12 mx-auto">
+        <div className="flex min-h-screen items-center justify-center">
+            <Card className="w-full max-w-lg p-8 bg-white rounded-lg shadow-md">
                 <img
-                    src={`${BASE_URL}/images/WOF_s42_onion_logo_rev.png`}
+                    src={`${BASE_URL}/images/auth0-icon-onlight.svg`}
                     className="block w-12 mb-6 ml-auto mr-auto"
                 />
                 {getScreenComponent(screen)}

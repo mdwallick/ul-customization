@@ -5,6 +5,7 @@ import { LoginId as ScreenProvider } from "@auth0/auth0-acul-js";
 // UI Components
 import { FieldError } from "@/components/ui/field-error";
 import { ScreenErrors } from "@/components/ui/screen-errors";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
     CardHeader,
@@ -13,7 +14,7 @@ import {
     CardContent,
 } from "@/components/ui/card";
 
-import AuthInput from "../components/ui/AuthInput";
+import AuthInput from "@/components/ui/AuthInput";
 import { APP_URL } from "@/lib/constants";
 
 export default function LoginId() {
@@ -37,13 +38,19 @@ export default function LoginId() {
 
         // grab the value from the form
         const identifierInput = event.target.querySelector("input#identifier");
+        const connectionInput = event.target.querySelector("input#connection");
 
-        // Call the SDK
-        const username = encodeURIComponent(identifierInput?.value);
+        //const username = encodeURIComponent(identifierInput?.value);
+        const username = identifierInput?.value;
+        const connection = isPhone ? "sms" : "email";
+        connectionInput.value = connection;
+
         console.log("Username:", username);
         console.log("transaction", screenProvider.transaction);
 
-        const connection = isPhone ? "sms" : "email";
+        // Call the SDK
+        //screenProvider.login({ username: identifierInput?.value });
+
         const url = `${APP_URL}/api/auth/login?connection=${connection}&login_hint=${username}`;
         console.log("URL:", url);
         window.location.href = url;
@@ -52,33 +59,43 @@ export default function LoginId() {
     // Render the form
     return (
         <form noValidate onSubmit={formSubmitHandler}>
-            <CardHeader>
-                <CardTitle className="mb-2 text-3xl font-medium text-center">
-                    {screenProvider.screen.texts?.title ?? "Welcome"}
-                </CardTitle>
-                <CardDescription className="mb-8 text-center">
-                    {screenProvider.screen.texts?.description ?? "Login to continue"}
-                </CardDescription>
-                <ScreenErrors className="mb-4" errors={errors} />
-            </CardHeader>
-            <CardContent>
-                <div className="mb-4 space-y-2 w-full">
-                    <AuthInput
-                        setUserInput={setUserInput}
-                        setIsPhone={setIsPhone}
-                        defaultValue={
-                            screenProvider.screen.data?.username ??
-                            screenProvider.untrustedData.submittedFormData?.username
-                        }
-                    />
-                    {identifierErrors?.map((error, index) => (
-                        <FieldError key={index} error={error} />
-                    ))}
-                </div>
-                <Button type="submit" id="submit-btn" className="w-full">
-                    {screenProvider.screen.texts?.buttonText ?? "Continue"}
-                </Button>
-            </CardContent>
+            <Input
+                type="hidden"
+                name="connection"
+                id="connection"
+                value="email"
+            />
+            <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
+                <CardHeader>
+                    <CardTitle className="mb-2 text-3xl font-medium text-center">
+                        {screenProvider.screen.texts?.title ?? "Welcome"}
+                    </CardTitle>
+                    <CardDescription className="mb-8 text-center">
+                        {screenProvider.screen.texts?.description ?? "Login to continue"}
+                    </CardDescription>
+                    <ScreenErrors className="mb-4" errors={errors} />
+                </CardHeader>
+                {/* <h2 class="mb-6 text-center text-xl font-semibold text-gray-800">{screenProvider.screen.texts?.description ?? "Login to continue"}</h2> */}
+                <CardContent>
+                    <div className="mb-4 space-y-2 w-full">
+                        <AuthInput
+                            setUserInput={setUserInput}
+                            setIsPhone={setIsPhone}
+                            className="w-full rounded-md border border-gray-300 px-5 py-3 text-gray-800 focus:border-blue-500 focus:outline-none focus:ring"
+                            defaultValue={
+                                screenProvider.screen.data?.username ??
+                                screenProvider.untrustedData.submittedFormData?.username
+                            }
+                        />
+                        {identifierErrors?.map((error, index) => (
+                            <FieldError key={index} error={error} />
+                        ))}
+                    </div>
+                    <Button type="submit" id="submit-btn" className="primary mt-4 w-full rounded-md bg-[#1a73e8] px-4 py-2 text-white shadow-md transition hover:bg-blue-600">
+                        {screenProvider.screen.texts?.buttonText ?? "Continue"}
+                    </Button>
+                </CardContent>
+            </div>
         </form>
     );
 }

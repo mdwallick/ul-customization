@@ -16,6 +16,8 @@ import {
     CardContent,
 } from "@/components/ui/card";
 
+import OtpInput from "@/components/ui/OtpInput";
+
 export default function LoginPasswordlessEmailCode() {
     // Initialize the SDK for this screen
     const screenProvider = new ScreenProvider();
@@ -34,10 +36,9 @@ export default function LoginPasswordlessEmailCode() {
 
         // grab the value from the form
         const identifierInput = event.target.querySelector("input#identifier");
-        const otpInput = event.target.querySelector("input#otp");
+        const otpInput = event.target.querySelector("#otp");
 
         // Call the SDK
-        console.log("OTP entered:", otpInput?.value);
         screenProvider.submitCode({
             email: identifierInput?.value,
             code: otpInput?.value
@@ -75,7 +76,7 @@ export default function LoginPasswordlessEmailCode() {
                             </span>
                         </span>
                         <Link
-                            href={screenProvider.screen.editIdentifierLink ?? "#"}
+                            href={screenProvider.screen.links?.edit_identifier ?? "#"}
                             className="ml-2"
                         >
                             {screenProvider.screen.texts?.editText ?? "Edit"}
@@ -87,12 +88,12 @@ export default function LoginPasswordlessEmailCode() {
                         id="identifier"
                         value={screenProvider.screen.data?.username}
                     />
-                    <Input
-                        type="text"
-                        id="otp"
-                        name="otp"
+                    <OtpInput
+                        length={6}
+                        onChange={(value) => console.log("OTP changed:", value)}
+                        onComplete={(value) => console.log("OTP complete:", value)}
+                        error={false}
                     />
-
                     {otpErrors?.map((error, index) => (
                         <FieldError key={index} error={error} />
                     ))}
@@ -103,7 +104,7 @@ export default function LoginPasswordlessEmailCode() {
                 <Text className="mb-2">
                     {screenProvider.screen.texts?.resendText ??
                         "Didn't receive an email?"}
-                    <Link className="ml-1" href={screenProvider.screen.resendLink ?? "#"}>
+                    <Link className="ml-1" href={screenProvider.screen?.links.resend_link ?? "#"}>
                         {screenProvider.screen.texts?.resendActionText ??
                             "Resend"}
                     </Link>

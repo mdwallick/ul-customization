@@ -22,16 +22,14 @@ export default function AuthInput({ setUserInput, setIsPhone, defaultValue = "" 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
-    // Detect and set the country code dynamically as the user types
-    const handleInputChange = (e) => {
-        let value = e.target.value;
+    const handleInputChange = (event) => {
+        let value = event.target.value;
         setInputValue(value);
 
-        let phoneNumber;
 
         // Detect if it's a phone number (only digits, spaces, or "+")
         const phoneRegex = /^[\d+\s]+$/;
-        const isPhoneNumber = phoneRegex.test(value) && value.length > 3;
+        const isPhoneNumber = phoneRegex.test(value);// && value.length > 2;
         console.log("isPhoneNumber?", isPhoneNumber);
         setIsPhoneState(isPhoneNumber);
 
@@ -42,22 +40,29 @@ export default function AuthInput({ setUserInput, setIsPhone, defaultValue = "" 
 
         try {
             // Parse the phone number from the input value
-            phoneNumber = parsePhoneNumberFromString(value, "US");
+            let phoneNumber = parsePhoneNumberFromString(value, "US");
 
-            // If phone number is valid, set the country code dynamically
-            if (phoneNumber && phoneNumber.isValid()) {
-                const country = countryCodes.find(
-                    (country) => phoneNumber.country === country.language.split("-")[1]
-                );
-                if (country) {
-                    console.log("Selected Country Code:", country);
-                    setSelectedCode(country); // Set the country code
-                    setInputValue(phoneNumber.number);
-                } else {
-                    console.log("Country not found for:", phoneNumber.country);
-                }
+            if (!value.startsWith("+") && phoneRegex.test(value) && value.length > 0) {
+                const usCountry = countryCodes.find(c => c.code === "+1");
+                setSelectedCode(usCountry);
+                value = `${usCountry.code} ${value}`; // Prepend +1 if missing
+                setInputValue(value);
             } else {
-                setInputValue(value); // If it's not a valid phone number, treat it as regular input
+                // If phone number is valid, set the country code dynamically
+                if (phoneNumber && phoneNumber.isValid()) {
+                    const country = countryCodes.find(
+                        (country) => phoneNumber.country === country.language.split("-")[1]
+                    );
+                    if (country) {
+                        console.log("Selected Country Code:", country);
+                        setSelectedCode(country); // Set the country code
+                        setInputValue(phoneNumber.number);
+                    } else {
+                        console.log("Country not found for:", phoneNumber.country);
+                    }
+                } else {
+                    setInputValue(value); // If it's not a valid phone number, treat it as regular input
+                }
             }
         } catch (error) {
             console.error("Error parsing phone number:", error);
@@ -84,17 +89,11 @@ export default function AuthInput({ setUserInput, setIsPhone, defaultValue = "" 
     }, []);
 
     return (
-        <div className="relative flex items-center rounded-lg p-2 w-full max-w-sm">
-            {/* Show country selector only if input is a phone number */}
-            {/* {isPhone && ( */}
-            <div
-                ref={dropdownRef}
-                className="relative cursor-pointer"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-                <div className="flex items-center p-2 border-r border-gray-300 bg-white w-full">
+        <div className="relative w-full max-w-sm">
+            {/* Country code dropdown */}
+            <div ref={dropdownRef} className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer">
+                <div className="flex items-center" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                     <span className="mr-2">{selectedCode.flag}</span>
-                    {/* <span>{selectedCode.code}</span> */}
                 </div>
                 {isDropdownOpen && (
                     <div className="absolute left-0 top-10 w-32 bg-white border border-gray-300 shadow-md max-h-40 overflow-auto z-10">
@@ -111,9 +110,8 @@ export default function AuthInput({ setUserInput, setIsPhone, defaultValue = "" 
                     </div>
                 )}
             </div>
-            {/* )} */}
 
-            {/* Email or Phone Number Input */}
+            {/* Input field with left padding for the flag */}
             <input
                 type="text"
                 id="identifier"
@@ -121,7 +119,7 @@ export default function AuthInput({ setUserInput, setIsPhone, defaultValue = "" 
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="Enter email or phone number"
-                className="flex-1 p-2 outline-none w-full"
+                className="w-full rounded-lg border border-gray-300 p-2 pl-12 outline-none"
             />
         </div>
     );

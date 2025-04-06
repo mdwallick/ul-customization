@@ -10,7 +10,7 @@ document.body.appendChild(rootElement);
 
 // Bootstrap the React App
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+    <StrictMode>
+        <App />
+    </StrictMode>,
 )

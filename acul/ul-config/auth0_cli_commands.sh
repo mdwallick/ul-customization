@@ -14,14 +14,12 @@ auth0 ul customize -r standard
 auth0 ul customize -r advanced -p {PROMPT} -s {SCREEN} -f {CONFIG_FILE}
 
 # local dev
-auth0 ul customize -r advanced -p "login-id" -s "login-id" -f ./screen_configs/dev-settings.json
-
-# prod
-auth0 ul customize -r advanced -p "login-id" -s "login-id" -f ./screen_configs/prod-settings.json
-
-# auth0 ul customize -r advanced -p "login-password" -s "login-password" -f ./screen_configs/dev-settings.json
-# auth0 ul customize -r advanced -p "login-passwordless" -s "login-passwordless-email-code" -f ./screen_configs/dev-settings.json
+auth0 ul customize -r advanced -p "login-id" -s "login-id" -f ./screen_configs/login-id.json
+auth0 ul customize -r advanced -p "login-passwordless" -s "login-passwordless-email-code" -f ./screen_configs/login-passwordless-email-code.json
+auth0 ul customize -r advanced -p "login-passwordless" -s "login-passwordless-sms-otp" -f ./screen_configs/login-passwordless-sms-otp.json
 
 # Use the default Universal Login UI
-auth0 ul customize -r standard -p {PROMPT} -s {SCREEN} -f ./screen_configs/reset-to-standard.json
+# auth0 ul customize -r standard -p {PROMPT} -s {SCREEN} -f ./screen_configs/reset-to-standard.json
+auth0 ul customize -r advanced -p "login-passwordless" -s "login-id" -f ./screen_configs/reset-to-standard.json
 auth0 ul customize -r advanced -p "login-passwordless" -s "login-passwordless-email-code" -f ./screen_configs/reset-to-standard.json
+auth0 ul customize -r advanced -p "login-passwordless" -s "login-passwordless-sms-otp" -f ./screen_configs/reset-to-standard.json

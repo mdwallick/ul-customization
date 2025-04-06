@@ -1,10 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --auth-background-url: url("https://storage.googleapis.com/thorax-studios-acul/wof/images/S42_Chasing_Sunsets_Masthead_Desktop.jpg");
+    --auth-background-url: url("https://storage.googleapis.com/thorax-studios-acul/atkosaas/images/auth-background.jpg");
+
+    /* colors */
+    --black: #000000;
+    --white: #ffffff;
+    --primary-color: #1a73e8;
+    --page-background: var(--white);
+
+    --primary-button-color: var(--primary-color);
+    /* primary-button-color w/ 0.26 alpha */
+    --primary-button: rgb(99, 93, 255, 0.26);
+    --primary-button-label: var(--white);
+
+    --secondary-button-border: #c9cace;
+    --secondary-button-label-color: #1e212a;
+    /* secondary-button-label-color w/ 0.26 alpha */
+    --secondary-button-label: rgba(30, 33, 42, 0.26);
+    --base-hover-color: rgba(26, 115, 232, 0.1);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -64,7 +82,7 @@
     --chart-5: 340 75% 55%;
   }
   body {
-    background-color: #000;
+    background-color: var(--white);
     background-size: cover;
     background-position: 0 0;
     background-repeat: no-repeat;
@@ -74,12 +92,95 @@
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
+    font-family: "Inter", sans-serif;
   }
   #root {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: auto;
     margin: 0 auto;
+  }
+  button {
+    border-radius: var(--button-border-radius);
+    border-width: var(--button-border-weight);
+    height: 52px;
+    font-size: var(--button-font-size);
+  }
+
+  button.primary {
+    background-color: var(--primary-button-color);
+    color: var(--primary-button-label);
+    border-width: 0px;
+    width: 100%;
+    padding: 4px 16px;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  button.secondary {
+    background-color: var(--widget-background);
+    color: var(--secondary-button-label-color);
+    border: var(--button-border-weight) solid var(--secondary-button-border);
+    display: flex;
+    align-items: center;
+    padding: 0 8px 0 52px;
+    position: relative;
+    width: 100%;
+  }
+
+  button.secondary:active {
+    /* background-color: var(--base-focus-color); */
+    box-shadow: inset 0 0 0 150px var(--primary-button);
+  }
+
+  button.secondary:focus {
+    outline: none;
+    background-color: var(--base-focus-color);
+    box-shadow: 0 0 0 4px var(--base-focus-color);
+  }
+
+  button.secondary > span.social-icon {
+    position: absolute;
+    left: 26px;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+  }
+
+  button.secondary > span.social-label {
+    text-align: left;
+  }
+
+  button:focus-visible {
+    background-color: var(--base-focus-color);
+    border-color: var(--base-focus-color);
+    box-shadow: 0 0 0 4px var(--base-focus-color);
+  }
+
+  button:hover {
+    /* box-shadow: 0 0 0 150px var(--base-hover-color) inset; */
+    background-color: var(--base-hover-color);
+  }
+
+  button:disabled {
+    background-color: var(--primary-button);
+    color: var(--secondary-button-label);
+  }
+
+  button > span.recent {
+    color: var(--white);
+    background-color: var(--primary-color);
+    font-size: 10px;
+    position: absolute;
+    padding: 0 4px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+    top: -4px;
+    right: 0px;
   }
 }
 
