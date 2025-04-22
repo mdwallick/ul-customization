@@ -6,9 +6,10 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build --watch",
+        "serve": "npx serve -p 4000 dist/",
         "lint": "eslint .",
         "preview": "vite preview",
-        "deploy": "gcloud storage cp -r dist/* gs://thorax-studios-acul/acul-demo/"
+        "deploy": "gcloud storage cp -r dist/* gs://acul/acul-demo/"
     },
     "dependencies": {
         "@auth0/auth0-acul-js": "^0.1.0-beta.1",
