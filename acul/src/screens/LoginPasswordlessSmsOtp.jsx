@@ -4,9 +4,7 @@ import { LoginPasswordlessSmsOtp as ScreenProvider } from "@auth0/auth0-acul-js"
 // UI Components
 import { FieldError } from "@/components/ui/field-error";
 import { ScreenErrors } from "@/components/ui/screen-errors";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { Link } from "@/components/ui/link";
 import {
@@ -16,9 +14,15 @@ import {
     CardContent,
 } from "@/components/ui/card";
 
+import { useRef, useState } from "react";
 import OtpInput from "@/components/ui/OtpInput";
 
 export default function LoginPasswordlessSmsOtp() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [otpValue, setOtpValue] = useState("");
+    const [error, setError] = useState(false);
+    const identifierRef = useRef(null);
+
     // Initialize the SDK for this screen
     const screenProvider = new ScreenProvider();
 
@@ -26,28 +30,28 @@ export default function LoginPasswordlessSmsOtp() {
     const errors = screenProvider.transaction.errors;
     const otpErrors = getFieldErrors("otp", errors);
 
-    // Handle the submit action
-    const formSubmitHandler = (event) => {
-        event.preventDefault();
+    const handleChange = (value) => {
+        setOtpValue(value);
+        setError(false); // Clear error on change
+    };
 
-        // disable the submit button
-        const submitBtn = event.target.querySelector("button#submit-btn");
-        if (submitBtn) submitBtn.setAttribute("disabled", "true");
+    const handleComplete = (otpValue) => {
+        console.log("Auto-submitting OTP:", otpValue);
+        setIsSubmitting(true);
 
-        // grab the value from the form
-        const identifierInput = event.target.querySelector("input#identifier");
-        const otpInput = event.target.querySelector("#otp");
-
-        // Call the SDK
         screenProvider.submitOTP({
-            username: identifierInput?.value,
-            code: otpInput?.value
+            username: identifierRef?.value,
+            code: otpValue
         })
+
+        if (otpValue.length !== 6) {
+            setError(true);
+        }
     };
 
     // Render the form
     return (
-        <form noValidate onSubmit={formSubmitHandler}>
+        <form>
             <CardHeader>
                 <CardTitle className="mb-2 text-3xl font-medium text-center">
                     {screenProvider.screen.texts?.title ?? "Verify Your Identity"}
@@ -59,16 +63,6 @@ export default function LoginPasswordlessSmsOtp() {
             </CardHeader>
             <CardContent>
                 <div className="mb-4 space-y-2">
-                    {/* <Label
-                        htmlFor="otp"
-                        className={cn(
-                            "block mb-2 font-semibold",
-                            otpErrors?.length ? "text-red-600" : "text-inherit"
-                        )}
-                    >
-                        {screenProvider.screen.texts?.placeholder ??
-                            "Enter the code"}
-                    </Label> */}
                     <Text className="mb-4 text-large">
                         <span className="inline-block">
                             Continue as
@@ -87,22 +81,20 @@ export default function LoginPasswordlessSmsOtp() {
                         type="hidden"
                         name="identifier"
                         id="identifier"
+                        ref={identifierRef}
                         value={screenProvider.screen.data?.username}
                     />
                     <OtpInput
                         length={6}
-                        onChange={(value) => console.log("OTP changed:", value)}
-                        onComplete={(value) => console.log("OTP complete:", value)}
-                        error={false}
+                        onChange={handleChange}
+                        onComplete={handleComplete}
+                        error={error}
+                        disabled={isSubmitting}
                     />
-
                     {otpErrors?.map((error, index) => (
                         <FieldError key={index} error={error} />
                     ))}
                 </div>
-                <Button type="submit" id="submit-btn" className="w-full">
-                    {screenProvider.screen.texts?.buttonText ?? "Verify"}
-                </Button>
                 <Text className="mb-2">
                     {screenProvider.screen.texts?.resendText ??
                         "Didn't receive a code?"}

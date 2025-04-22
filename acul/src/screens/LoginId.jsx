@@ -5,7 +5,6 @@ import { LoginId as ScreenProvider } from "@auth0/auth0-acul-js";
 // UI Components
 import { FieldError } from "@/components/ui/field-error";
 import { ScreenErrors } from "@/components/ui/screen-errors";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
     CardHeader,
@@ -34,22 +33,18 @@ export default function LoginId() {
 
         // disable the submit button
         const submitBtn = event.target.querySelector("button#submit-btn");
-        if (submitBtn) submitBtn.setAttribute("disabled", "true");
+        if (submitBtn) {
+            submitBtn.setAttribute("disabled", "true");
+        }
 
         // grab the value from the form
         const identifierInput = event.target.querySelector("input#identifier");
-        const connectionInput = event.target.querySelector("input#connection");
 
-        //const username = encodeURIComponent(identifierInput?.value);
-        const username = identifierInput?.value;
+        const username = encodeURIComponent(identifierInput?.value);
         const connection = isPhone ? "sms" : "email";
-        connectionInput.value = connection;
 
         console.log("Username:", username);
         console.log("transaction", screenProvider.transaction);
-
-        // Call the SDK
-        //screenProvider.login({ username: identifierInput?.value });
 
         const url = `${APP_URL}/api/auth/login?connection=${connection}&login_hint=${username}`;
         console.log("URL:", url);
@@ -59,12 +54,6 @@ export default function LoginId() {
     // Render the form
     return (
         <form noValidate onSubmit={formSubmitHandler}>
-            <Input
-                type="hidden"
-                name="connection"
-                id="connection"
-                value="email"
-            />
             <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
                 <CardHeader>
                     <CardTitle className="mb-2 text-3xl font-medium text-center">
