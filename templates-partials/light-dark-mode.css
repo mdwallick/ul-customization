@@ -1,0 +1,359 @@
+/* Base (Light Mode) Theme */
+:root {
+  --primary-color: #0a84ff;
+  --primary-color-no-override: #0059d6;
+  --link-color-values: 0, 123, 173;
+  --link-color: rgb(var(--link-color-values));
+  --page-background-color: #fff;
+  --info-color: #0a66e1;
+  --success-color: #0a8852;
+  --error-color-values: 208, 14, 23;
+  --error-color: #d00e17;
+  --error-text-color: #fff;
+  --warning-color: #ffdb5f;
+  --button-font-color: #fff;
+  --widget-background-color: #fff;
+  --presentational-content-color: #6f7780;
+  --brand-primary-color: #3f59e4;
+  --gray-lightest: #f1f2f3;
+  --gray-light: #dee2e6;
+  --gray-mid: #c2c8d0;
+  --gray-dark: #6f7780;
+  --gray-darkest: #2d333a;
+  --gray-mid-dark: #686868;
+  --gray-social-border: #8e8e8e;
+  --computed-readonly-color: color-mix(
+    in hsl,
+    var(--input-background-color),
+    var(--input-text-color) 8%
+  );
+  --font-default-color: var(--gray-darkest);
+  --font-light-color: var(--gray-dark);
+  --title-font-color: var(--gray-darkest);
+  --title-font-size: 24px;
+  --title-font-weight: var(--font-default-weight);
+  --base-line-height: 1.1;
+  --lg-line-height: 1.5;
+  --lg-font-size: 16px;
+  --xl-font-size: 20px;
+  --ulp-label-font-size: var(--lg-font-size);
+  --ulp-label-font-weight: var(--font-default-weight);
+  --logo-alignment: 0 auto;
+  --logo-height: 52px;
+  --header-alignment: center;
+  --page-background-alignment: center;
+  --icon-height: 20px;
+  --icon-width: 20px;
+  --icon-default-color: var(--gray-dark);
+  --button-height: var(--base-form-element-height);
+  --input-height: var(--base-form-element-height);
+  --input-background-color: var(--widget-background-color);
+  --input-text-color: var(--font-default-color);
+  --social-button-border-width: 1px;
+  --social-button-border-color: var(--gray-social-border);
+  --secondary-button-border-color: var(--gray-mid);
+  --secondary-button-text-color: var(--font-default-color);
+  --radio-button-border-color: var(--gray-mid);
+  --ulp-captcha-widget-theme: light;
+  --spacing: 8px;
+  --spacing-0-5: calc(var(--spacing) / 2);
+  --spacing-1: var(--spacing);
+  --spacing-1-5: calc(var(--spacing) * 1.5);
+  --spacing-2: calc(var(--spacing) * 2);
+  --spacing-3: calc(var(--spacing) * 3);
+  --spacing-4: calc(var(--spacing) * 4);
+  --spacing-5: calc(var(--spacing) * 5);
+  --spacing-6: calc(var(--spacing) * 6);
+  --spacing-6-5: calc(var(--spacing) * 6.5);
+  --base-form-element-height: var(--spacing-6-5);
+  --prompt-width: calc(var(--spacing) * 50);
+  --outer-padding: calc(var(--spacing) * 10);
+  --prompt-min-height: calc(var(--spacing) * 67.5);
+  --transition-speed: 0.15s;
+  --transition-easing: ease-in-out;
+  --border-default-color: var(--gray-mid);
+  --button-border-width: 1px;
+  --box-border-color: transparent;
+  --box-border-width: 0;
+  --box-border-style: solid;
+  --out-input-border-radius: 3px;
+  --out-input-padding: 0 var(--spacing-2);
+  --out-input-box-shadow-depth: 0 0 0 1px;
+  --out-input-line-height: var(--input-height);
+  --out-input-label-top: calc(var(--input-height) / 2);
+  --out-input-label-top-focus: -2px;
+  --out-input-label-transform: translateY(-50%);
+  --out-input-label-transform-focus: scale(0.88)
+    translateX(calc(-1 * var(--spacing-1))) translateY(-50%);
+  --out-input-border-color: var(--gray-mid-dark);
+  --out-input-border-width: 1px;
+  --input-box-shadow-depth: var(--out-input-box-shadow-depth);
+  --input-border-radius: var(--out-input-border-radius);
+  --input-padding: var(--out-input-padding);
+  --input-line-height: var(--out-input-line-height);
+  --input-label-top: var(--out-input-label-top);
+  --input-label-top-focus: var(--out-input-label-top-focus);
+  --input-label-transform: var(--out-input-label-transform);
+  --input-label-transform-focus: var(--out-input-label-transform-focus);
+  --input-border-color: var(--out-input-border-color);
+  --input-border-width: var(--out-input-border-width);
+  --FSI-input-border-radius: 5px 5px 0 0;
+  --FSI-input-padding: var(--spacing-1) var(--spacing-2) 0;
+  --FSI-input-box-shadow: none;
+  --FSI-input-line-height: 1;
+  --FSI-input-label-top: 50%;
+  --FSI-input-label-top-focus: var(--spacing-1);
+  --FSI-input-label-transform: translateY(-50%);
+  --FSI-input-label-transform-focus: scale(0.7) translateX(-7px)
+    translateY(-50%);
+  --FSI-input-border-width: 0 0 1px 0;
+  --overlay-box-shadow-size: inset 0 0 0 150px;
+  --base-hover-color-values: 0, 0, 0;
+  --base-hover-color: rgb(var(--base-hover-color-values));
+  --hover-transparency-value: 0.1;
+  --transparency-hover-color: rgba(
+    var(--base-hover-color-values),
+    var(--hover-transparency-value)
+  );
+
+  --button-hover-shadow: var(--overlay-box-shadow-size)
+    var(--transparency-hover-color);
+  --base-focus-color: var(--brand-primary-color);
+  --focus-transparency-value: 0.15;
+  --transparency-focus-color: var(--widget-background-color);
+  --button-dark-focus-shadow: var(--overlay-box-shadow-size)
+    var(--transparency-focus-color);
+  --transparency-focus-error-color: rgba(
+    var(--error-color-values),
+    var(--focus-transparency-value)
+  );
+  --outline-input-border-focus: 2px;
+  --outline-input-offset-focus: 2px;
+  --outline-input-offset-autofill-focus: 1px;
+  --input-border-autofill-focus: 2px;
+  --outline-link-offset-focus: -1px;
+  --border-radius-component: 3px;
+  --border-radius-outer: 5px;
+  --border-radius-form-elements: 3px;
+  --button-border-radius: 3px;
+  --radio-border-width: 1px;
+  --radio-border-radius: var(--button-border-radius);
+  --textarea-num-rows: 5;
+  --textarea-height: calc(
+    var(--base-line-height) * var(--textarea-num-rows) * var(--lg-font-size) + 2 *
+      (var(--spacing-2) + var(--input-border-width))
+  );
+  --shadow-component-outer: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --z-index-background: -1;
+  --z-index-base: 1;
+  --z-index-first: 2;
+  --z-index-second: 3;
+  --z-index-third: 4;
+}
+
+/* Dark Mode Overrides */
+html.dark body {
+  background-color: #0f172a;
+}
+
+.dark {
+  --primary-color: #0a84ff;
+  --primary-color-no-override: #0a84ff;
+  --link-color-values: 0, 123, 173;
+  --link-color: rgb(var(--link-color-values));
+  --page-background-color: #0f172a;
+  --info-color: #0a66e1;
+  --success-color: #0a8852;
+  --error-color-values: 208, 14, 23;
+  --error-color: #d00e17;
+  --error-text-color: #f1f1f1;
+  --warning-color: #ffdb5f;
+  --button-font-color: #f1f1f1;
+  --widget-background-color: #030617;
+  --presentational-content-color: #6f7780;
+  --brand-primary-color: #3fc2e4;
+  --gray-lightest: #f1f1f1;
+  --gray-light: #f1f1f1;
+  --gray-mid: #f1f1f1;
+  --gray-dark: #f1f1f1;
+  --gray-darkest: #ffffff;
+  --gray-mid-dark: #f1f1f1;
+  --gray-social-border: #f1f1f1;
+  --computed-readonly-color: color-mix(
+    in hsl,
+    var(--input-background-color),
+    var(--input-text-color) 8%
+  );
+  --font-default-color: var(--gray-darkest);
+  --font-light-color: var(--gray-dark);
+  --title-font-color: var(--gray-darkest);
+  --title-font-size: 24px;
+  --title-font-weight: var(--font-default-weight);
+  --base-line-height: 1.1;
+  --lg-line-height: 1.5;
+  --lg-font-size: 16px;
+  --xl-font-size: 20px;
+  --ulp-label-font-size: var(--lg-font-size);
+  --ulp-label-font-weight: var(--font-default-weight);
+  --logo-alignment: 0 auto;
+  --logo-height: 52px;
+  --header-alignment: center;
+  --page-background-alignment: center;
+  --icon-height: 20px;
+  --icon-width: 20px;
+  --icon-default-color: var(--gray-dark);
+  --button-height: var(--base-form-element-height);
+  --input-height: var(--base-form-element-height);
+  --input-background-color: var(--widget-background-color);
+  --input-text-color: var(--font-default-color);
+  --social-button-border-width: 1px;
+  --social-button-border-color: var(--gray-social-border);
+  --secondary-button-border-color: var(--gray-mid);
+  --secondary-button-text-color: var(--font-default-color);
+  --radio-button-border-color: var(--gray-mid);
+  --ulp-captcha-widget-theme: dark;
+  --spacing: 8px;
+  --spacing-0-5: calc(var(--spacing) / 2);
+  --spacing-1: var(--spacing);
+  --spacing-1-5: calc(var(--spacing) * 1.5);
+  --spacing-2: calc(var(--spacing) * 2);
+  --spacing-3: calc(var(--spacing) * 3);
+  --spacing-4: calc(var(--spacing) * 4);
+  --spacing-5: calc(var(--spacing) * 5);
+  --spacing-6: calc(var(--spacing) * 6);
+  --spacing-6-5: calc(var(--spacing) * 6.5);
+  --base-form-element-height: var(--spacing-6-5);
+  --prompt-width: calc(var(--spacing) * 50);
+  --outer-padding: calc(var(--spacing) * 10);
+  --prompt-min-height: calc(var(--spacing) * 67.5);
+  --transition-speed: 0.15s;
+  --transition-easing: ease-in-out;
+  --border-default-color: var(--gray-mid);
+  --button-border-width: 1px;
+  --box-border-color: transparent;
+  --box-border-width: 0;
+  --box-border-style: solid;
+  --out-input-border-radius: 3px;
+  --out-input-padding: 0 var(--spacing-2);
+  --out-input-box-shadow-depth: 0 0 0 1px;
+  --out-input-line-height: var(--input-height);
+  --out-input-label-top: calc(var(--input-height) / 2);
+  --out-input-label-top-focus: -2px;
+  --out-input-label-transform: translateY(-50%);
+  --out-input-label-transform-focus: scale(0.88)
+    translateX(calc(-1 * var(--spacing-1))) translateY(-50%);
+  --out-input-border-color: var(--gray-mid-dark);
+  --out-input-border-width: 1px;
+  --input-box-shadow-depth: var(--out-input-box-shadow-depth);
+  --input-border-radius: var(--out-input-border-radius);
+  --input-padding: var(--out-input-padding);
+  --input-line-height: var(--out-input-line-height);
+  --input-label-top: var(--out-input-label-top);
+  --input-label-top-focus: var(--out-input-label-top-focus);
+  --input-label-transform: var(--out-input-label-transform);
+  --input-label-transform-focus: var(--out-input-label-transform-focus);
+  --input-border-color: var(--out-input-border-color);
+  --input-border-width: var(--out-input-border-width);
+  --FSI-input-border-radius: 5px 5px 0 0;
+  --FSI-input-padding: var(--spacing-1) var(--spacing-2) 0;
+  --FSI-input-box-shadow: none;
+  --FSI-input-line-height: 1;
+  --FSI-input-label-top: 50%;
+  --FSI-input-label-top-focus: var(--spacing-1);
+  --FSI-input-label-transform: translateY(-50%);
+  --FSI-input-label-transform-focus: scale(0.7) translateX(-7px)
+    translateY(-50%);
+  --FSI-input-border-width: 0 0 1px 0;
+  --overlay-box-shadow-size: inset 0 0 0 150px;
+  --base-hover-color-values: 0, 0, 0;
+  --base-hover-color: rgb(var(--base-hover-color-values));
+  --hover-transparency-value: 0.1;
+  --transparency-hover-color: rgba(
+    var(--base-hover-color-values),
+    var(--hover-transparency-value)
+  );
+
+  --button-hover-shadow: var(--overlay-box-shadow-size)
+    var(--transparency-hover-color);
+  --base-focus-color: var(--brand-primary-color);
+  --focus-transparency-value: 0.15;
+  --transparency-focus-color: var(--widget-background-color);
+  --button-dark-focus-shadow: var(--overlay-box-shadow-size)
+    var(--transparency-focus-color);
+  --transparency-focus-error-color: rgba(
+    var(--error-color-values),
+    var(--focus-transparency-value)
+  );
+  --outline-input-border-focus: 2px;
+  --outline-input-offset-focus: 2px;
+  --outline-input-offset-autofill-focus: 1px;
+  --input-border-autofill-focus: 2px;
+  --outline-link-offset-focus: -1px;
+  --border-radius-component: 3px;
+  --border-radius-outer: 5px;
+  --border-radius-form-elements: 3px;
+  --button-border-radius: 3px;
+  --radio-border-width: 1px;
+  --radio-border-radius: var(--button-border-radius);
+  --textarea-num-rows: 5;
+  --textarea-height: calc(
+    var(--base-line-height) * var(--textarea-num-rows) * var(--lg-font-size) + 2 *
+      (var(--spacing-2) + var(--input-border-width))
+  );
+  --shadow-component-outer: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --z-index-background: -1;
+  --z-index-base: 1;
+  --z-index-first: 2;
+  --z-index-second: 3;
+  --z-index-third: 4;
+}
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: #ccc;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle::before {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: 2px;
+  left: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle.dark::before {
+  transform: translateX(30px);
+}
+
+.icon {
+  font-size: 18px;
+  position: absolute;
+  top: 6px;
+}
+
+.icon.sun {
+  left: 8px;
+}
+
+.icon.moon {
+  right: 8px;
+}
