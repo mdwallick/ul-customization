@@ -29,6 +29,16 @@ auth0 login
 
 3. Click `Deploy Changes!`
 
+## Screenshots
+
+### Dark Mode
+
+![Dark Mode](./images/dark-mode.png)
+
+### Light Mode
+
+![Light Mode](./images/light-mode.png)
+
 ## Caveats
 
 - There may be a flicker during screen transitions where the page is changed from light to dark.
