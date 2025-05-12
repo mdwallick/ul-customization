@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{locale}}">
   <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     {%- auth0:head -%}
 
     <style>
@@ -338,6 +342,10 @@
         transition: background-color 0.3s ease, color 0.3s ease;
       }
 
+      #toggle-container {
+        margin: 1rem auto 0 auto;
+      }
+
       .theme-toggle {
         font-size: var(--toggle-font-size);
         color: var(--toggle-text-color);
@@ -361,33 +369,60 @@
     {%- auth0:widget -%}
 
     <script>
-      const root = document.documentElement
-      const toggle = document.getElementById("darkModeToggle")
-      const modeLabel = toggle.querySelector(".mode-label")
-      const otherLabel = toggle.querySelector(".other-mode-label")
+      window.addEventListener("DOMContentLoaded", () => {
+        const root = document.documentElement
+        const widgetContainer = document.querySelector("main._widget")
+        if (!widgetContainer) return
 
-      const userPref = localStorage.getItem("theme")
-      const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches
+        const firstSection = widgetContainer.querySelector("section")
+        if (!firstSection) return
 
-      if (userPref === "dark" || (!userPref && systemPrefersDark)) {
-        root.classList.add("dark")
-      }
+        const toggleContainer = document.createElement("div")
+        toggleContainer.id = "toggle-container"
 
-      function updateToggleUI() {
-        const isDark = root.classList.contains("dark")
-        modeLabel.textContent = isDark ? "Dark" : "Light"
-        otherLabel.textContent = isDark ? "Light" : "Dark"
-        localStorage.setItem("theme", isDark ? "dark" : "light")
-      }
+        const toggleButton = document.createElement("button")
+        toggleButton.id = "darkModeToggle"
+        toggleButton.className = "theme-toggle"
 
-      toggle.addEventListener("click", () => {
-        root.classList.toggle("dark")
+        const modeLabel = document.createElement("span")
+        modeLabel.className = "mode-label"
+        modeLabel.textContent = "Light"
+
+        const otherLabel = document.createElement("span")
+        otherLabel.className = "other-mode-label"
+        otherLabel.textContent = "Dark"
+
+        const icon = document.createElement("i")
+        icon.className = "fas fa-3x fa-moon"
+
+        toggleButton.append(icon)
+
+        toggleContainer.appendChild(toggleButton)
+        firstSection.appendChild(toggleContainer)
+
+        const userPref = localStorage.getItem("theme")
+        const systemPrefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches
+
+        if (userPref === "dark" || (!userPref && systemPrefersDark)) {
+          root.classList.add("dark")
+        }
+
+        function updateToggleUI() {
+          const isDark = root.classList.contains("dark")
+          icon.classList.toggle("fa-moon", !isDark)
+          icon.classList.toggle("fa-sun", isDark)
+          localStorage.setItem("theme", isDark ? "dark" : "light")
+        }
+
+        toggleButton.addEventListener("click", () => {
+          root.classList.toggle("dark")
+          updateToggleUI()
+        })
+
         updateToggleUI()
       })
-
-      updateToggleUI()
     </script>
   </body>
 </html>

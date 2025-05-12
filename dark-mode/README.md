@@ -27,16 +27,9 @@ auth0 login
 
    ![Page template content](./images/page-template-content.png)
 
-3. Copy the content of `dark-mode-partial.html` and paste it into the partial(s) where you want the toggle button to appear.
-
-   The screenshot below is of the `login-id` prompt and the `secondary-actions-end` partial.
-
-   ![Partial content](./images/partial-content.png)
-
-   You may wish to copy the page partial content to multiple prompts, depending on your needs.
-
-4. Click `Deploy Changes!`
+3. Click `Deploy Changes!`
 
 ## Caveats
 
-- This dark mode workaround does not work with forms for actions. While the overall dark/light mode coloring works, there are some inconsistencies, such as input field text rendering as white, even though the dark mode CSS specifies otherwise.
+- There may be a flicker during screen transitions where the page is changed from light to dark.
+- This workaround does not work with forms for actions. While the overall dark/light mode coloring works, there are some inconsistencies, such as input field text rendering as white with the input field background color also being white, even though the dark mode CSS specifies otherwise.
