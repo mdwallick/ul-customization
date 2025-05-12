@@ -1,4 +1,23 @@
-# Setup
+# Advanced Customization for Universal Login (ACUL)
+
+## Overview
+
+This demo is focused solely on email and SMS passwordless, so these are the only screens I've implemented:
+
+- LoginId
+- LoginPasswordlessEmailOtp
+- LoginPasswordlessSmsOtp
+
+## Prerequisites
+
+This project requires the [Auth0 CLI](https://github.com/auth0/auth0-cli). Ensure
+that you have logged the CLI in to your desired tenant.
+
+```bash
+auth0 login
+```
+
+## Setup
 
 Install the dependencies.
 
@@ -24,12 +43,6 @@ This starts a local server on port 4000.
 
 The last step is to set the rendering mode for the screens you wish to customize. I've created a helper shell
 scripts to make this easier. It requires that you have the auth0 CLI installed and logged in to your tenant.
-
-This demo is focused solely on email and SMS passwordless, so these are the only screens I've implemented:
-
-- LoginId
-- LoginPasswordlessEmailOtp
-- LoginPasswordlessSmsOtp
 
 Change into the ul-config directory and run
 
