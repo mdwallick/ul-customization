@@ -1,40 +1,16 @@
-# Setup
+# Universal Login Customization
 
-Clone this repo, cd into it and install the dependencies.
+This project is a collection of Auth0 UL customizations that I've created for one reason or another. Each
+diretory has its own README describing what it does and how to set it up.
 
-`$ gh repo clone mdwallick/ul-customization && cd ul-customization && npm install`
+- [acul](./acul/) - Advanced Customization for Universal Login. [Auth0 Docs](https://auth0.com/docs/customize/login-pages/advanced-customizations)
+- WIP [connection-switching](./connection-switching/) - page template and partials for switching connections during a transaction (e.g. start with password, switch to SMS passwordless)
+- [dark-mode](./dark-mode/) - dark mode support for UL
 
-If you're going to run your ACUL code locally, there are two tasks you need to start.
+## Contributing
 
-First, you need to start the build process. This not only builds the assets needed, but it also rebuilds them when you make changes.
+Feel free to open issues and pull requests if you have suggestions for improvements or fixes.
 
-Go into the acul directory
+## License
 
-`cd acul`
-
-and then run
-
-`npm run build`
-
-Second, you need to serve the built files locally. Also in the acul directory, run
-
-`npm run serve`
-
-to start a local server on port 4000.
-
-The last step is to set the rendering mode for the screens you wish to customize. I've created a helper shell
-scripts to make this easier. It requires that you have the auth0 CLI installed and logged in to your tenant.
-
-This demo is focused solely on email and SMS passwordless, so these are the only screens I've implemented:
-
-* LoginId
-* LoginPasswordlessEmailOtp
-* LoginPasswordlessSmsOtp
-
-Change into the ul-config directory and run
-
-`enable-acul.sh`
-
-To enable advanced rendering for those screens. To reset UL to its default behavior, run
-
-`reset-ul.sh`
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

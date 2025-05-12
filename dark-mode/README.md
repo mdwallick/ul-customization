@@ -40,11 +40,3 @@ auth0 login
 ## Caveats
 
 - This dark mode workaround does not work with forms for actions. While the overall dark/light mode coloring works, there are some inconsistencies, such as input field text rendering as white, even though the dark mode CSS specifies otherwise.
-
-## Contributing
-
-Feel free to open issues and pull requests if you have suggestions for improvements or fixes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
