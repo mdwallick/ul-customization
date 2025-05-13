@@ -8,8 +8,9 @@ dark modes. If the user opts to use the toggle, the last mode used will be saved
 
 ## Prerequisites
 
-This project requires the [Auth0 CLI](https://github.com/auth0/auth0-cli). Ensure
-that you have logged the CLI in to your desired tenant.
+- You must have a [custom domain](https://auth0.com/docs/customize/custom-domains) configured on your tenant.
+- This project requires the [Auth0 CLI](https://github.com/auth0/auth0-cli). Ensure
+  that you have logged the CLI in to your desired tenant.
 
 ```bash
 auth0 login
