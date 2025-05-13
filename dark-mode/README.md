@@ -10,7 +10,7 @@ dark modes. If the user opts to use the toggle, the last mode used will be saved
 
 - You must have a [custom domain](https://auth0.com/docs/customize/custom-domains) configured on your tenant.
 - This project requires the [Auth0 CLI](https://github.com/auth0/auth0-cli). Ensure
-  that you have logged the CLI in to your desired tenant.
+  that you have logged the CLI into your desired tenant.
 
 ```bash
 auth0 login
@@ -43,4 +43,4 @@ auth0 login
 ## Caveats
 
 - There may be a flicker during screen transitions where the page is changed from light to dark.
-- This workaround does not work with forms for actions. While the overall dark/light mode coloring works, there are some inconsistencies, such as input field text rendering as white with the input field background color also being white, even though the dark mode CSS specifies otherwise.
+- This workaround does not work with [Auth0 Forms](https://auth0.com/docs/customize/forms). While the overall dark/light mode coloring works, there are some inconsistencies, such as input field text rendering as white with the input field background color also being white, even though the dark mode CSS specifies otherwise.
