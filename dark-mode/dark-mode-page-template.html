@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{locale}}">
   <head>
+    {%- auth0:head -%}
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    {%- auth0:head -%}
 
     <style>
       #custom-prompt-logo {
@@ -173,11 +174,6 @@
         --toggle-padding: 0.5rem 1rem;
         --toggle-border-radius: 0.5rem;
         --toggle-hover-bg: rgba(0, 0, 0, 0.05);
-      }
-
-      /* Dark Mode Overrides */
-      html.dark body {
-        background-color: #0f172a;
       }
 
       .dark {
@@ -360,8 +356,27 @@
       .theme-toggle:hover {
         background: var(--toggle-hover-bg);
       }
-    </style>
 
+      /*
+      Dark Mode Overrides
+
+      These two class overrides are required for full dark mode
+      support.
+      
+      The first is for the body background color.
+
+      The second one is for Auth0 Forms, so you don't get a white 
+      input field with white input text.
+      */
+      html.dark body {
+        --page-background-color: #0f172a;
+      }
+
+      div.af-field-content {
+        --input-font-color: #fff;
+        --input-background-color: #030617;
+      }
+    </style>
     <title>Welcome to {{ application.name }}</title>
   </head>
 
