@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a simple workaround implementation of dark mode support for Auth0 Universal Login. Is detects and uses
+This is a simple workaround implementation of dark mode support for Auth0 Universal Login. It detects and uses
 the user's dark mode preference (if present) and adds a toggle button so the user can switch between light and
 dark modes. If the user opts to use the toggle, the last mode used will be saved as a preference.
 
