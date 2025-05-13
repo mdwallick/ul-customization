@@ -2,9 +2,7 @@
 
 ## Overview
 
-This is a simple workaround implementation of dark mode support for Auth0 Universal Login. It detects and uses
-the user's dark mode preference (if present) and adds a toggle button so the user can switch between light and
-dark modes. If the user opts to use the toggle, the last mode used will be saved as a preference.
+This is a simple implementation of dark mode support for Auth0 Universal Login. It detects and uses the user's dark mode browser/OS preference (if present) and adds a toggle button so the user can switch between light and dark modes. If the user opts to use the toggle, the last mode used will be saved as a preference in the browser’s local storage.
 
 ## Prerequisites
 
@@ -43,4 +41,3 @@ auth0 login
 ## Caveats
 
 - There may be a flicker during screen transitions where the page is changed from light to dark.
-- This workaround does not work with [Auth0 Forms](https://auth0.com/docs/customize/forms). While the overall dark/light mode coloring works, there are some inconsistencies, such as input field text rendering as white with the input field background color also being white, even though the dark mode CSS specifies otherwise.
