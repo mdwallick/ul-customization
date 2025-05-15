@@ -28,6 +28,12 @@ auth0 login
 
 3. Click `Deploy Changes!`
 
+Or, update the page template non-interactively.
+
+```bash
+cat dark-mode-page-template.html | auth0 ul templates update
+```
+
 ## Screenshots
 
 ### Dark Mode
