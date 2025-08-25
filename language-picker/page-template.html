@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="{{locale}}">
+  <head>
+    {%- auth0:head -%}
+
+    <style>
+      :root {
+        --toggle-font-size: 1.5rem;
+        --toggle-text-color: #333;
+        --toggle-bg: transparent;
+        --toggle-padding: 0.5rem 1rem;
+        --toggle-border-radius: 0.5rem;
+      }
+
+      #toggle-container {
+        margin: 1rem auto 0 auto;
+      }
+
+      .lang-toggle {
+        font-size: var(--toggle-font-size);
+        color: var(--toggle-text-color);
+        background: var(--toggle-bg);
+        padding: var(--toggle-padding);
+        border: none;
+        cursor: pointer;
+        border-radius: var(--toggle-border-radius);
+        transition: background 0.3s ease;
+      }
+    </style>
+
+    <script>
+      const languages = [
+        { code: "en", name: "English" },
+        { code: "it", name: "Italian" },
+        { code: "es", name: "Spanish" },
+      ]
+
+      function createLanguageForm() {
+        const widgetContainer = document.querySelector("main._widget")
+        if (!widgetContainer) return
+
+        const firstSection = widgetContainer.querySelector("section")
+        if (!firstSection) return
+
+        const toggleContainer = document.createElement("div")
+        toggleContainer.id = "toggle-container"
+
+        const currentLocale = "{{locale}}"
+        const form = document.createElement("form")
+        form.method = "post"
+        form.setAttribute("data-form-secondary", "true")
+        form.id = "lang-form"
+
+        const fieldDiv = document.createElement("div")
+        fieldDiv.className = "ulp-field"
+
+        const select = document.createElement("select")
+        select.name = "language"
+        select.id = "language"
+        select.className = "lang-toggle"
+        select.onchange = updateSelectedLanguage
+
+        languages.forEach((lang) => {
+          const option = document.createElement("option")
+          option.value = lang.code
+          option.textContent = lang.name
+          if (currentLocale === lang.code) {
+            option.selected = true
+          }
+          select.appendChild(option)
+        })
+
+        // Create hidden inputs
+        const persistInput = document.createElement("input")
+        persistInput.type = "hidden"
+        persistInput.name = "persist"
+        persistInput.value = "session"
+
+        const changeLanguageBtn = document.createElement("input")
+        changeLanguageBtn.id = "changeLanguage"
+        changeLanguageBtn.type = "submit"
+        changeLanguageBtn.name = "action"
+        changeLanguageBtn.value = "change-language"
+        changeLanguageBtn.style.display = "none"
+        changeLanguageBtn.formNoValidate = true
+
+        const stateInput = document.createElement("input")
+        stateInput.type = "hidden"
+        stateInput.name = "state"
+        stateInput.value = "{{state}}"
+
+        // Assemble the form
+        fieldDiv.appendChild(select)
+        form.appendChild(fieldDiv)
+        form.appendChild(persistInput)
+        form.appendChild(changeLanguageBtn)
+        form.appendChild(stateInput)
+
+        // Add form to the body after the widget
+        toggleContainer.appendChild(form)
+        firstSection.appendChild(toggleContainer)
+      }
+
+      function updateSelectedLanguage() {
+        const selectElement = document.getElementById("language")
+        const selectedValue = selectElement.value
+        document.getElementById("changeLanguage").click()
+      }
+
+      // Add event listener to create form after DOM is loaded
+      document.addEventListener("DOMContentLoaded", createLanguageForm)
+    </script>
+  </head>
+
+  <body class="app _widget-auto-layout">
+    {%- auth0:widget -%}
+  </body>
+</html>
